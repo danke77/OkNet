@@ -1,5 +1,6 @@
 package com.danke.http
 
+import com.danke.http.converter.gson.GsonConverterFactory
 import com.danke.http.monitor.IMonitor
 import com.danke.http.monitor.MonitorInterceptor
 import com.danke.http.util.readWriteLazy
@@ -10,7 +11,6 @@ import retrofit2.CallAdapter
 import retrofit2.Converter
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import retrofit2.converter.gson.GsonConverterFactory
 import java.util.ArrayList
 import java.util.concurrent.TimeUnit
 
