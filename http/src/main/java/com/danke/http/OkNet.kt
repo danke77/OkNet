@@ -1,5 +1,7 @@
 package com.danke.http
 
+import com.danke.http.monitor.IMonitor
+import com.danke.http.monitor.MonitorInterceptor
 import com.danke.http.util.readWriteLazy
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -30,6 +32,9 @@ object OkNet {
     @JvmStatic
     var isLoggingEnable: Boolean = false
 
+    @JvmStatic
+    var monitor: IMonitor? = null
+
     private val converterFactories: ArrayList<Converter.Factory> = arrayListOf(GsonConverterFactory.create())
 
     private val callAdapterFactories: ArrayList<CallAdapter.Factory> = arrayListOf(RxJava2CallAdapterFactory.create())
@@ -52,6 +57,10 @@ object OkNet {
         if (!isHttpLoggingInterceptorAdded) {
             builder.addInterceptor(HttpLoggingInterceptor().setLevel(
                     if (isLoggingEnable) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE))
+        }
+
+        monitor?.let {
+            builder.addInterceptor(MonitorInterceptor(it))
         }
 
         builder.connectTimeout(timeout, TimeUnit.SECONDS)
