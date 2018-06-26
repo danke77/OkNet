@@ -1,5 +1,6 @@
 package com.danke.http
 
+import com.danke.http.adapter.rxjava2.RxJava2ErrorHandlingCallAdapterFactory
 import com.danke.http.converter.gson.GsonConverterFactory
 import com.danke.http.monitor.IMonitor
 import com.danke.http.monitor.MonitorInterceptor
@@ -10,7 +11,6 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.CallAdapter
 import retrofit2.Converter
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import java.util.ArrayList
 import java.util.concurrent.TimeUnit
 
@@ -37,7 +37,7 @@ object OkNet {
 
     private val converterFactories: ArrayList<Converter.Factory> = arrayListOf(GsonConverterFactory.create())
 
-    private val callAdapterFactories: ArrayList<CallAdapter.Factory> = arrayListOf(RxJava2CallAdapterFactory.create())
+    private val callAdapterFactories: ArrayList<CallAdapter.Factory> = arrayListOf(RxJava2ErrorHandlingCallAdapterFactory.create())
 
     private val interceptors: ArrayList<Interceptor> = arrayListOf()
 
