@@ -1,0 +1,3 @@
+<resources>
+    <string name="http_request_default_error_message">Request Failed!</string>
+</resources>
