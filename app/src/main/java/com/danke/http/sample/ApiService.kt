@@ -20,5 +20,5 @@ interface ApiService {
                    @Field("count") count: Int = 10): Observable<Response<MovieResponse>>
 
     @GET("subject/{id}")
-    fun get(@Path("id") id: Long): Observable<Response<MovieResponse>>
+    fun getSubject(@Path("id") id: Long): Observable<Response<MovieResponse>>
 }
