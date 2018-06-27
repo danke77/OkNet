@@ -34,22 +34,20 @@ class MainActivity : AppCompatActivity() {
 
         btGet.setOnClickListener {
             textResponse.text = ""
-            getObserver = MovieObserver(this@MainActivity, textResponse)
-            apiService
+            getObserver = apiService
                     .getSubject(1764796)
                     .compose(DefaultTransformer<Response<MovieResponse>, MovieResponse>())
                     .map { it.title }
-                    .subscribe(getObserver)
+                    .subscribeWith(MovieObserver(this@MainActivity, textResponse))
         }
 
         btPost.setOnClickListener {
             textResponse.text = ""
-            postObserver = MovieObserver(this@MainActivity, textResponse)
-            apiService
+            postObserver = apiService
                     .getTop250()
                     .compose(DefaultTransformer<Response<MovieResponse>, MovieResponse>())
                     .map { it.title }
-                    .subscribe(postObserver)
+                    .subscribeWith(MovieObserver(this@MainActivity, textResponse))
         }
     }
 
