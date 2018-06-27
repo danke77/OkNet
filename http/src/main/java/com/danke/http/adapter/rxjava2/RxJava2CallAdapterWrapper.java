@@ -4,23 +4,16 @@ import android.support.annotation.NonNull;
 
 import com.danke.http.converter.gson.JsonParseException;
 
-import org.reactivestreams.Publisher;
-
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.net.SocketTimeoutException;
 import java.util.concurrent.TimeoutException;
 
 import io.reactivex.Completable;
-import io.reactivex.CompletableSource;
 import io.reactivex.Flowable;
 import io.reactivex.Maybe;
-import io.reactivex.MaybeSource;
 import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
 import io.reactivex.Single;
-import io.reactivex.SingleSource;
-import io.reactivex.functions.Function;
 import retrofit2.Call;
 import retrofit2.CallAdapter;
 import retrofit2.HttpException;
@@ -54,48 +47,33 @@ final class RxJava2CallAdapterWrapper<R> implements CallAdapter<R, Object> {
         Object result = wrapped.adapt(call);
 
         if (result instanceof Single) {
-            return ((Single) result).onErrorResumeNext(new Function<Throwable, SingleSource>() {
-                @Override
-                public SingleSource apply(@NonNull Throwable throwable) throws Exception {
-                    return Single.error(asRetrofitException(throwable));
-                }
-            });
+            return ((Single) result).onErrorResumeNext(throwable ->
+                    Single.error(asRetrofitException((Throwable) throwable))
+            );
         }
 
         if (result instanceof Observable) {
-            return ((Observable) result).onErrorResumeNext(new Function<Throwable, ObservableSource>() {
-                @Override
-                public ObservableSource apply(@NonNull Throwable throwable) throws Exception {
-                    return Observable.error(asRetrofitException(throwable));
-                }
+            return ((Observable) result).onErrorResumeNext(throwable -> {
+                return Observable.error(asRetrofitException((Throwable) throwable));
             });
         }
 
         if (result instanceof Flowable) {
-            return ((Flowable) result).onErrorResumeNext(new Function<Throwable, Publisher>() {
-                @Override
-                public Publisher apply(Throwable throwable) throws Exception {
-                    return Flowable.error(asRetrofitException(throwable));
-                }
+            return ((Flowable) result).onErrorResumeNext(throwable -> {
+                return Flowable.error(asRetrofitException((Throwable) throwable));
             });
         }
 
         if (result instanceof Maybe) {
-            return ((Maybe) result).onErrorResumeNext(new Function<Throwable, MaybeSource>() {
-                @Override
-                public MaybeSource apply(Throwable throwable) throws Exception {
-                    return Maybe.error(asRetrofitException(throwable));
-                }
+            return ((Maybe) result).onErrorResumeNext(throwable -> {
+                return Maybe.error(asRetrofitException((Throwable) throwable));
             });
         }
 
         if (result instanceof Completable) {
-            return ((Completable) result).onErrorResumeNext(new Function<Throwable, CompletableSource>() {
-                @Override
-                public CompletableSource apply(@NonNull Throwable throwable) throws Exception {
-                    return Completable.error(asRetrofitException(throwable));
-                }
-            });
+            return ((Completable) result).onErrorResumeNext(throwable ->
+                    Completable.error(asRetrofitException(throwable))
+            );
         }
 
         return result;
