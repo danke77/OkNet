@@ -26,14 +26,10 @@ public class App extends Application {
 
         OkNet.setBaseUrl("https://api.douban.com/v2/movie/");
         OkNet.setLoggingEnable(BuildConfig.DEBUG);
-        OkNet.setMonitor(new IMonitor() {
-            @Override
-            public void monitor(@NotNull Request request, long tookMs, long contentLength) {
+        OkNet.setMonitor((request, tookMs, contentLength) ->
                 Log.i(TAG, "request: " + new GsonBuilder().create().toJson(request)
                         + "\ntookMs: " + String.valueOf(tookMs)
-                        + "\ncontentLength: " + String.valueOf(contentLength));
-            }
-        });
+                        + "\ncontentLength: " + String.valueOf(contentLength)));
         OkNet.addInterceptor(new CommonHeaderInterceptor.Builder()
                 .header("access_token_key", "access_token_value")
                 .build());
