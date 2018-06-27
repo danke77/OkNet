@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
             textResponse.text = ""
             getObserver = MovieObserver(this@MainActivity, textResponse)
             apiService
-                    .get(1764796)
+                    .getSubject(1764796)
                     .compose(DefaultTransformer<Response<MovieResponse>, MovieResponse>())
                     .map { it.title }
                     .subscribe(getObserver)
