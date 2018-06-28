@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
         findViewById(R.id.btPost).setOnClickListener(v -> {
             textResponse.setText("");
-            getObserver = apiService
+            postObserver = apiService
                     .getTop250(0, 10)
                     .compose(new DefaultTransformer<>())
                     .map(movieResponse -> movieResponse.title)
