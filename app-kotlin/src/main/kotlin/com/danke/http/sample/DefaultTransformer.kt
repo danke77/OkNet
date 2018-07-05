@@ -10,7 +10,7 @@ import retrofit2.Response
  */
 class DefaultTransformer<T : Response<R>, R : BaseResponse<*>> : BaseObservableTransformer<T, R>() {
 
-    override fun isTokenInvalid(r: R): Boolean = false
+    override fun isTokenInvalid(t: R): Boolean = false
 
-    override fun isResponseError(r: R): Boolean = r.code != null || r.msg != null
+    override fun isResponseError(t: R): Boolean = t.code != null && t.code != -1 || t.msg != null
 }

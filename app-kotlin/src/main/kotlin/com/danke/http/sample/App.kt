@@ -17,7 +17,7 @@ class App : Application() {
 
     companion object {
         private const val TAG = "OkNet"
-        private const val BASE_URL = "https://api.douban.com/v2/movie/"
+        private const val BASE_URL = "https://api.github.com/"
     }
 
     override fun onCreate() {

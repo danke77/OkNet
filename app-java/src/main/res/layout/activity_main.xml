@@ -12,17 +12,6 @@
         android:padding="10dp"
         android:text="GET"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/btPost"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/btPost"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:padding="10dp"
-        android:text="POST"
-        app:layout_constraintLeft_toRightOf="@id/btGet"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
