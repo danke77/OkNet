@@ -6,6 +6,7 @@ import com.danke.http.OkNet
 import com.danke.http.RetrofitBuilder
 import com.danke.http.interceptor.CommonHeaderInterceptor
 import com.danke.http.monitor.IMonitor
+import com.danke.http.util.getDefaultUserAgent
 import com.google.gson.GsonBuilder
 import okhttp3.Request
 
@@ -36,6 +37,7 @@ class App : Application() {
                     })
                     .interceptors(CommonHeaderInterceptor.Builder()
                             .header("access_token_key", "access_token_value")
+                            .header("User-Agent", getDefaultUserAgent(applicationContext))
                             .build())
         }
     }

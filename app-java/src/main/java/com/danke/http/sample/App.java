@@ -7,6 +7,7 @@ import com.danke.http.OkNet;
 import com.danke.http.RetrofitBuilder;
 import com.danke.http.interceptor.CommonHeaderInterceptor;
 import com.danke.http.monitor.IMonitor;
+import com.danke.http.util.UtilsKt;
 import com.google.gson.GsonBuilder;
 
 import org.jetbrains.annotations.NotNull;
@@ -35,6 +36,7 @@ public class App extends Application {
                                 + "\ncontentLength: " + String.valueOf(contentLength)))
                 .interceptors(new CommonHeaderInterceptor.Builder()
                         .header("access_token_key", "access_token_value")
+                        .header("User-Agent", UtilsKt.getDefaultUserAgent(getApplicationContext()))
                         .build()));
     }
 }
