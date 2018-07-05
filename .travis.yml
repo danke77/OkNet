@@ -63,7 +63,7 @@ install: true
 before_script:
 
 script:
-  - ./gradlew clean build assemble
+  - ./gradlew clean build assembleRelease
 
 after_script:
 
