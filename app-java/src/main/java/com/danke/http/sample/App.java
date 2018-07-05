@@ -20,7 +20,7 @@ import okhttp3.Request;
 public class App extends Application {
 
     private static final String TAG = "OkNet";
-    private static final String BASE_URL = "https://api.douban.com/v2/movie/";
+    private static final String BASE_URL = "https://api.github.com/";
 
     @Override
     public void onCreate() {

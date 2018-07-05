@@ -18,8 +18,7 @@ import retrofit2.Response
  */
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var getObserver: BaseObserver<String>
-    private lateinit var postObserver: BaseObserver<String>
+    private lateinit var observer: BaseObserver<String>
     private val apiService by lazy {
         OkNet.create(ApiService::class.java)
     }
@@ -34,30 +33,20 @@ class MainActivity : AppCompatActivity() {
 
         btGet.setOnClickListener {
             textResponse.text = ""
-            getObserver = apiService
-                    .getSubject(1764796)
-                    .compose(DefaultTransformer<Response<MovieResponse>, MovieResponse>())
-                    .map { it.title }
-                    .subscribeWith(MovieObserver(this@MainActivity, textResponse))
-        }
-
-        btPost.setOnClickListener {
-            textResponse.text = ""
-            postObserver = apiService
-                    .getTop250()
-                    .compose(DefaultTransformer<Response<MovieResponse>, MovieResponse>())
-                    .map { it.title }
-                    .subscribeWith(MovieObserver(this@MainActivity, textResponse))
+            observer = apiService
+                    .getUser("Square")
+                    .compose(DefaultTransformer<Response<UserResponse>, UserResponse>())
+                    .map { it.name }
+                    .subscribeWith(UserObserver(this@MainActivity, textResponse))
         }
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        getObserver.unsubscribe()
-        postObserver.unsubscribe()
+        observer.unsubscribe()
     }
 
-    private class MovieObserver constructor(context: Context, private val textView: TextView) : ToastObserver<String>(context) {
+    private class UserObserver constructor(context: Context, private val textView: TextView) : ToastObserver<String>(context) {
         override fun onTokenInvalid(e: TokenInvalidException) {
         }
 

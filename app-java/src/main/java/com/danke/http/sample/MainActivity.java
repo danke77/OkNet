@@ -23,8 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "OkNet";
 
-    private BaseObserver<String> getObserver;
-    private BaseObserver<String> postObserver;
+    private BaseObserver<String> observer;
     private ApiService apiService;
 
     @Override
@@ -37,35 +36,25 @@ public class MainActivity extends AppCompatActivity {
 
         findViewById(R.id.btGet).setOnClickListener(v -> {
             textResponse.setText("");
-            getObserver = apiService
-                    .getSubject(1764796)
+            observer = apiService
+                    .getUser("Square")
                     .compose(new DefaultTransformer<>())
-                    .map(movieResponse -> movieResponse.title)
-                    .subscribeWith(new MovieObserver(MainActivity.this, textResponse));
-        });
-
-        findViewById(R.id.btPost).setOnClickListener(v -> {
-            textResponse.setText("");
-            postObserver = apiService
-                    .getTop250(0, 10)
-                    .compose(new DefaultTransformer<>())
-                    .map(movieResponse -> movieResponse.title)
-                    .subscribeWith(new MovieObserver(MainActivity.this, textResponse));
+                    .map(userResponse -> userResponse.name)
+                    .subscribeWith(new UserObserver(MainActivity.this, textResponse));
         });
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        getObserver.unsubscribe();
-        postObserver.unsubscribe();
+        observer.unsubscribe();
     }
 
-    private class MovieObserver extends ToastObserver<String> {
+    private class UserObserver extends ToastObserver<String> {
 
         private TextView textView;
 
-        MovieObserver(@NonNull Context context, @NonNull TextView textView) {
+        UserObserver(@NonNull Context context, @NonNull TextView textView) {
             super(context);
             this.textView = textView;
         }

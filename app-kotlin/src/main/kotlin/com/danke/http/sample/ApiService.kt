@@ -9,16 +9,6 @@ import retrofit2.http.*
  * @date 2018/6/27
  */
 interface ApiService {
-
-    @GET("top250")
-    fun getTop250(@Query("start") start: Int = 0,
-                  @Query("count") count: Int = 10): Observable<Response<MovieResponse>>
-
-    @FormUrlEncoded
-    @POST("top250")
-    fun postTop250(@Field("start") start: Int = 0,
-                   @Field("count") count: Int = 10): Observable<Response<MovieResponse>>
-
-    @GET("subject/{id}")
-    fun getSubject(@Path("id") id: Long): Observable<Response<MovieResponse>>
+    @GET("users/{user}")
+    fun getUser(@Path("user") user: String): Observable<Response<UserResponse>>
 }
