@@ -153,7 +153,7 @@ bintray {
     def USER
     def KEY
 
-    File localPropertiesFile = new File(project.rootProject.file('local.properties'))
+    File localPropertiesFile = new File("${rootProject.projectDir}/local.properties")
     if (localPropertiesFile.exists()) {
         Properties properties = new Properties()
         properties.load(localPropertiesFile.newDataInputStream())
