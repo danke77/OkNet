@@ -256,7 +256,7 @@ You can define your own Subscriber or Observer to handle reponse, witch extends
 
 ## Proguard
 
-A ProGuard configuration is provided as part of the library, so you don’t need to add any specific rules to your ProGuard configuration.
+A Proguard configuration is provided as part of the library, so you don’t need to add any specific rules to your Proguard configuration.
 
 ## Contribution
 
