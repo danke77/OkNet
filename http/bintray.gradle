@@ -150,15 +150,18 @@ afterEvaluate {
 }
 
 bintray {
-    Properties properties = new Properties()
-    properties.load(project.rootProject.file('local.properties').newDataInputStream())
+    def USER
+    def KEY
 
-    def USER = properties.getProperty('bintray.user')
-    def KEY = properties.getProperty('bintray.apikey')
-    if (USER == null) {
+    File localPropertiesFile = new File(project.rootProject.file('local.properties'))
+    if (localPropertiesFile.exists()) {
+        Properties properties = new Properties()
+        properties.load(localPropertiesFile.newDataInputStream())
+
+        USER = properties.getProperty('bintray.user')
+        KEY = properties.getProperty('bintray.apikey')
+    } else {
         USER = System.getenv('bintray.user')
-    }
-    if (KEY == null) {
         KEY = System.getenv('bintray.apikey')
     }
 
