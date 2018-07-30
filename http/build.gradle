@@ -67,4 +67,3 @@ dependencies {
 }
 
 apply from: 'https://raw.githubusercontent.com/danke77/bintray/master/bintray.gradle'
-// apply from: './bintray.gradle'
