@@ -1,5 +1,6 @@
 # OkNet
 
+[ ![API](https://img.shields.io/badge/API-14%2B-blue.svg?style=flat) ](https://android-arsenal.com/api?level=14)
 [ ![Kotlin](https://img.shields.io/badge/Kotlin-1.2.41-blue.svg) ](http://kotlinlang.org)
 [ ![Retrofit](https://img.shields.io/badge/Retrofit-2.4.0-blue.svg) ](https://github.com/square/retrofit)
 [ ![OkHttp](https://img.shields.io/badge/OkHttp-3.11.0-blue.svg) ](https://github.com/square/okhttp)
